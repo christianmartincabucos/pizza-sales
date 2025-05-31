@@ -69,7 +69,7 @@ pizza-sales/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/pizza-sales.git
+   git clone https://github.com/christianmartincabucos/pizza-sales.git
    cd pizza-sales
    ```
 
@@ -80,69 +80,41 @@ pizza-sales/
 
 3. **Install backend dependencies**
    ```bash
-   docker-compose exec backend composer install
+   docker-compose exec pizza-backend composer install
    ```
 
 4. **Set up environment variables**
    ```bash
    cp backend/.env.example backend/.env
-   docker-compose exec backend php artisan key:generate
+   docker-compose exec pizza-backend php artisan key:generate
    ```
 
 5. **Run database migrations and seeders**
    ```bash
-   docker-compose exec backend php artisan migrate
-   docker-compose exec backend php artisan db:seed
+   docker-compose exec pizza-backend php artisan migrate
+   docker-compose exec pizza-backend php artisan import:csv-data
    ```
 
-6. **Install frontend dependencies and build assets**
-   ```bash
-   docker-compose exec frontend npm install
-   docker-compose exec frontend npm run build
-   ```
-
-7. **Access the application**
-   - Frontend: [http://localhost:8080](http://localhost:8080)
+6. **Access the application**
+   - Frontend: [http://localhost:5173](http://localhost:5173)
    - Backend API: [http://localhost:8000](http://localhost:8000)
 
 ---
 
 ## 🛠 Development
 
-### Backend Development
-
 ```bash
-# Run Laravel dev server
-docker-compose exec backend php artisan serve
+# Run docker compose build
+docker-compose build
+
+#Create containers
+docker-compose up -d
 
 # Migrate DB
-docker-compose exec backend php artisan migrate
-
-# Seed DB
-docker-compose exec backend php artisan db:seed
+docker-compose exec pizza-backend php artisan migrate
 
 # Clear cache
-docker-compose exec backend php artisan cache:clear
-```
-
-### Frontend Development
-
-```bash
-# Start dev server with hot reload
-docker-compose exec frontend npm run dev
-
-# Build for production
-docker-compose exec frontend npm run build
-```
-
-### Testing
-
-```bash
-# Run backend tests
-docker-compose exec backend php artisan test
-
-# Run frontend tests
-docker-compose exec frontend npm run test
+docker-compose exec pizza-backend php artisan cache:clear
 ```
 
 ---
